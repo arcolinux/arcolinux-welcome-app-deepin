@@ -57,7 +57,7 @@ class Main(Gtk.Window):
         print("Clicked")
 
     def on_ai_clicked(self, widget):
-    	subprocess.Popen(["/usr/bin/calamares_polkit", "--style", "fusion"], shell=False)
+    	subprocess.Popen(["/usr/bin/calamares_polkit", "-d", "--style", "fusion"], shell=False)
 
     def on_gp_clicked(self, widget):
         t = threading.Thread(target=self.run_app,
