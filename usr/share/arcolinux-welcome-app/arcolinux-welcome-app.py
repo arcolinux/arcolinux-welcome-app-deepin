@@ -57,11 +57,19 @@ class Main(Gtk.Window):
         print("Clicked")
 
     def on_ai_clicked(self, widget):
-    	subprocess.Popen(["/usr/bin/calamares_polkit", "-d", "--style", "fusion"], shell=False)
+        t = threading.Thread(target=self.run_app, args=(["sudo", "cp", "/etc/calamares/settings-beginner.conf", "/etc/calamares/settings.conf"],))
+        t.daemon = True
+        t.start()
+        subprocess.Popen(["/usr/bin/calamares_polkit", "-d", "--style", "fusion"], shell=False)
+     
+    def on_aica_clicked(self, widget):
+        t = threading.Thread(target=self.run_app, args=(["sudo", "cp", "/etc/calamares/settings-advanced.conf", "/etc/calamares/settings.conf"],))
+        t.daemon = True
+        t.start()
+        subprocess.Popen(["/usr/bin/calamares_polkit", "-d", "--style", "fusion"], shell=False)  
 
     def on_gp_clicked(self, widget):
-        t = threading.Thread(target=self.run_app,
-                             args=(["/usr/bin/gparted"],))
+        t = threading.Thread(target=self.run_app, args=(["/usr/bin/gparted"],))
         t.daemon = True
         t.start()
 
